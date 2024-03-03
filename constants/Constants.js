@@ -19,5 +19,14 @@ module.exports = {
     PAGE_HOME: "homePage",
     PAGE_LOGIN: "login",
     ERROR_INTERNAL_SERVER: "Internal error Occured",
-
+    MESSAGE: "message",
+    FIELD: "field",
+    USERNAME: "userName",
+    PASSWORD: "password",
+    FIRST_NAME: "firstName",
+    LAST_NAME: "lastName",
+    EMAIL: "emailId",
+    PHONE_NO: "phoneNo",
+    DATE_OF_BIRTH: "dateOfBirth",
+    GENDER: "gender"
 };

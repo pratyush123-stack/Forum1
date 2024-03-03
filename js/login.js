@@ -31,28 +31,28 @@ async function createUser(username, password, firstName, lastName, emailId, phon
 
     if (!usernameFlag) {
         console.log(constants.USERNAME_INVALID);
-        return { "field": "userName", "message": constants.USERNAME_INVALID };
+        return { field: constants.USERNAME, message: constants.USERNAME_INVALID };
     } else if (!passwordFlag) {
         console.log(constants.PASSWORD_INVALID);
-        return { "field": "password", "message": constants.PASSWORD_INVALID};
+        return { field: constants.PASSWORD, message: constants.PASSWORD_INVALID};
     } else if (!firstNameFlag) {
         console.log(constants.FIRST_NAME_INVALID);
-        return { "field": "firstName", "message": constants.FIRST_NAME_INVALID};
+        return { field: constants.FIRST_NAME, message: constants.FIRST_NAME_INVALID};
     } else if (!lastNameFlag) {
         console.log(constants.LAST_NAME_INVALID);
-        return { "field": "lastname", "message": constants.LAST_NAME_INVALID};
+        return { field: constants.LAST_NAME, message: constants.LAST_NAME_INVALID};
     } else if (!emailIdFlag) {
         console.log(constants.EMAIL_ID_INVALID);
-        return { "field": "emailId", "message": constants.EMAIL_ID_INVALID};
+        return { field: constants.EMAIL, message: constants.EMAIL_ID_INVALID};
     } else if (!phoneNoFlag) {
         console.log(constants.PHONE_NUMBER_INVALID);
-        return { "field": "phoneNo", "message": constants.PHONE_NUMBER_INVALID};
+        return { field: constants.PHONE_NO, message: constants.PHONE_NUMBER_INVALID};
     } else if (!dateOfBirthFlag) {
         console.log(constants.DATE_OF_BIRTH_INVALID);
-        return { "field": "dateOfBirth", "message": constants.DATE_OF_BIRTH_INVALID};
+        return { field: constants.DATE_OF_BIRTH, message: constants.DATE_OF_BIRTH_INVALID};
     } else if (!genderFlag) {
         console.log(constants.GENDER_INVALID);
-        return { "field": "gender", "message": constants.GENDER_INVALID};
+        return { field: constants.GENDER, message: constants.GENDER_INVALID};
     }
 
     console.log("All input parameters are valid");
@@ -107,11 +107,12 @@ async function validateUserLogin(userName, password) {
 
     if (!usernameFlag) {
         console.log(constants.USERNAME_INVALID);
-        return constants.USERNAME_INVALID;
+        return { field: constants.USERNAME, message: constants.USERNAME_INVALID };
     } else if (!passwordFlag) {
         console.log(constants.PASSWORD_INVALID);
-        return constants.PASSWORD_INVALID;
+        return { field: constants.PASSWORD, message: constants.PASSWORD_INVALID };
     }
+
     console.log("Username and password are valid");
 
     try {
