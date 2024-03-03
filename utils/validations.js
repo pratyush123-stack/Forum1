@@ -1,4 +1,3 @@
-
 function validateUserName(data){
     const regex = /^[a-zA-Z0-9\s#@_.]+$/;
     return regex.test(data);
