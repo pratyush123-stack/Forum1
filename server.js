@@ -25,9 +25,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, firstName, lastName, emailId, phoneNo, dateOfBirth, gender } = req.body;
   try {
-    const responseData = await loginPage.createUser(username, password);
+    const responseData = await loginPage.createUser(username, password, firstName, lastName, emailId, phoneNo, dateOfBirth, gender);
     res.json({ page: "homePage", responseData });
   } catch (error) {
     console.error(error);
@@ -36,7 +36,7 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body; 
+  const { username, password} = req.body; 
   try {
     const responseData = await loginPage.validateUserLogin(username, password);
     res.json({ page: "login", responseData });
