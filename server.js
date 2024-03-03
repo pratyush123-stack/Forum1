@@ -1,10 +1,17 @@
+// "scripts": {
+//   "start": "nodemon server.js"
+// },
+
+
 const saltRounds = 10;
 const port = 3000;
 const cors = require('cors');
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const path = require('path');
 const mongoose = require('mongoose');
+const loginPage = require('./js/login')
+
 const URI = require('./db/databaseConfig');
 mongoose.connect(URI);
 
@@ -15,33 +22,27 @@ const corsOptions = {
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
-app.get('/', (req, res) => {
-  res.send('login');
-});
- 
-app.post('/submit-login', async (req, res) => {
-  let responseData = '';
-  
-  const action = req.body.action;
-  const username = req.body.username;
-  const password = req.body.password;
+app.use(bodyParser.json());
 
-  if(action == 'Register'){
-      try {
-          const responseData = await loginPage.createUser(username, password);
-          res.send({page: "login", resopnseData: responseData});
-      } catch (error) {
-          console.error(error); 
-          res.status(500);
-      }
-  }else if(action == 'Login'){
-      try {
-          const responseData = await loginPage.validateUserLogin(username, password);
-          res.send({page: "homePage", resopnsedata: responseData});
-      } catch (error) {
-          console.error(error + responseData); 
-          res.status(500);
-      }
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const responseData = await loginPage.createUser(username, password);
+    res.json({ page: "homePage", responseData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body; 
+  try {
+    const responseData = await loginPage.validateUserLogin(username, password);
+    res.json({ page: "login", responseData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error: "Internal Server Error"}); 
   }
 });
 

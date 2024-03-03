@@ -4,9 +4,11 @@ function validateUserName(data){
     return regex.test(data);
 }
 
-function validatePassword(data) {
-    const regex = /^(?=.*[a-z])(?=.*\d)[A-Za-z\d@#_]+$/;
-    return regex.test(data);
+function validatePassword(password) {
+    if (password.length < 6) {
+        return false;
+    }
+    return true;
 }
 
 module.exports = {

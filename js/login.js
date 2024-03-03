@@ -6,6 +6,7 @@ const User = require('../models/UserDataTable');
 const validations = require('../utils/validations');
 
 async function createUser(username, password) {
+    console.log(username, password);
     const usernameFlag = validations.validateUserName(username);
     const passwordFlag = validations.validatePassword(password);
     if (!usernameFlag) {
@@ -32,6 +33,7 @@ async function createUser(username, password) {
 }
 
 async function validateUserLogin(userName, password) {
+    console.log(username, password);
     const usernameFlag = validations.validateUserName(userName);
     const passwordFlag = validations.validatePassword(password);
     if (!usernameFlag) {
