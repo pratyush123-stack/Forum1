@@ -31,28 +31,28 @@ async function createUser(username, password, firstName, lastName, emailId, phon
 
     if (!usernameFlag) {
         console.log(constants.USERNAME_INVALID);
-        return constants.USERNAME_INVALID;
+        return { "field": "userName", "message": constants.USERNAME_INVALID };
     } else if (!passwordFlag) {
         console.log(constants.PASSWORD_INVALID);
-        return constants.PASSWORD_INVALID;
+        return { "field": "password", "message": constants.PASSWORD_INVALID};
     } else if (!firstNameFlag) {
         console.log(constants.FIRST_NAME_INVALID);
-        return constants.FIRST_NAME_INVALID;
+        return { "field": "firstName", "message": constants.FIRST_NAME_INVALID};
     } else if (!lastNameFlag) {
         console.log(constants.LAST_NAME_INVALID);
-        return constants.LAST_NAME_INVALID;
+        return { "field": "lastname", "message": constants.LAST_NAME_INVALID};
     } else if (!emailIdFlag) {
         console.log(constants.EMAIL_ID_INVALID);
-        return constants.EMAIL_ID_INVALID;
+        return { "field": "emailId", "message": constants.EMAIL_ID_INVALID};
     } else if (!phoneNoFlag) {
         console.log(constants.PHONE_NUMBER_INVALID);
-        return constants.PHONE_NUMBER_INVALID;
+        return { "field": "phoneNo", "message": constants.PHONE_NUMBER_INVALID};
     } else if (!dateOfBirthFlag) {
         console.log(constants.DATE_OF_BIRTH_INVALID);
-        return constants.DATE_OF_BIRTH_INVALID;
+        return { "field": "dateOfBirth", "message": constants.DATE_OF_BIRTH_INVALID};
     } else if (!genderFlag) {
         console.log(constants.GENDER_INVALID);
-        return constants.GENDER_INVALID;
+        return { "field": "gender", "message": constants.GENDER_INVALID};
     }
 
     console.log("All input parameters are valid");

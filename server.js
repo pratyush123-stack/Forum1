@@ -26,7 +26,7 @@ app.post('/register', async (req, res) => {
   try {
     const responseData = await loginPage.createUser(username, password, firstName, lastName, emailId, phoneNo, dateOfBirth, gender);
     res.json({ page: constants.PAGE_HOME, responseData });
-    console.log("Registration successful:", responseData);
+    console.log("Response for registration:", responseData);
   } catch (error) {
     console.error("Error occurred during registration:", error);
     res.status(500).json({ error: constants.ERROR_INTERNAL_SERVER });
@@ -39,7 +39,7 @@ app.post('/login', async (req, res) => {
   try {
     const responseData = await loginPage.validateUserLogin(username, password);
     res.json({ page: constants.PAGE_LOGIN, responseData });
-    console.log("Login successful:", responseData);
+    console.log("Response for login:", responseData);
   } catch (error) {
     console.error("Error occurred during login:", error);
     res.status(500).json({ error: constants.ERROR_INTERNAL_SERVER });
