@@ -9,21 +9,25 @@ async function createUser(username, password) {
     const usernameFlag = validations.validateUserName(username);
     const passwordFlag = validations.validatePassword(password);
     if (!usernameFlag) {
-        console.log('UserName Invalid');
+        return "UserName Invalid";
     }
     else if (!passwordFlag) {
-        console.log('Password Invalid');
+        return "Password Invalid";
     }
     else if (usernameFlag && passwordFlag) {
-        try {
-            const hash = await bcrypt.hash(password, saltRounds);
-            const user = await User.create({ userName: username, password: hash });
+        await mongoose.connect(URI);
+        const loginUser = await User.findOne({ userName: username });
+            if (!loginUser) {
+            try {
+                const hash = await bcrypt.hash(password, saltRounds);
+                const user = await User.create({ userName: username, password: hash });
 
-            console.log('User created:', user);
-            return user;
-        } catch (error) {
-            console.error('Error creating user:', error);
-            throw error;
+                return "User created";
+            } catch (error) {
+                return error;
+            }
+        } else{
+            return "UserName Already Taken..";
         }
     }
 }
@@ -51,7 +55,7 @@ async function validateUserLogin(userName, password) {
             return "Password did not match";
         }
     } catch (err) {
-        console.error("Error:", err);
+        return err;
     }
 }
 

@@ -24,20 +24,19 @@ app.post('/submit-login', async (req, res) => {
 
   if(action == 'Register'){
     try {
-      await loginPage.createUser(username, password);
-      res.sendFile(path.join(__dirname, 'loginPage', 'login.html'));
+      const responseData = await loginPage.createUser(username, password);
+      res.sendFile(path.join(__dirname, 'loginPage', 'login.html'), {responseData});
     } catch (error) {
       console.error(error); 
-      res.status(500).send('Error creating user');
+      res.status(500);
     }
   }else if(action == 'Login'){
     try {
-      let responseData = await loginPage.validateUserLogin(username, password);
-      res.body.responseDataDiv = responseData;
-      res.sendFile(path.join(__dirname, 'pages', 'homePage.html'));
+      const responseData = await loginPage.validateUserLogin(username, password);
+      res.sendFile(path.join(__dirname, 'pages', 'homePage.html'), {responseData});
     } catch (error) {
       console.error(error + responseData); 
-      res.status(500).send('Error While login');
+      res.status(500);
     }
   }
 });
