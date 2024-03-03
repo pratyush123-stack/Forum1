@@ -20,9 +20,8 @@ async function createUser(username, password) {
             if (!loginUser) {
             try {
                 const hash = await bcrypt.hash(password, saltRounds);
-                const user = await User.create({ userName: username, password: hash });
-
-                return "User created";
+                await User.create({ userName: username, password: hash });
+                return "User Created Successfully";
             } catch (error) {
                 return error;
             }
@@ -47,15 +46,16 @@ async function validateUserLogin(userName, password) {
         const loginUser = await User.findOne({ userName: userName });
         if (!loginUser) {
             return "User not found";
+        }else{
+            const passwordMatchFlag = await bcrypt.compare(password, loginUser.password);
+            if (passwordMatchFlag) {
+                return "Password matched successfully";
+            } else {
+                return "Password did not match";
+            }
         }
-        const passwordMatchFlag = await bcrypt.compare(password, loginUser.password);
-        if (passwordMatchFlag) {
-            return "Password matched successfully";
-        } else {
-            return "Password did not match";
-        }
-    } catch (err) {
-        return err;
+    } catch (error) {
+        return error;
     }
 }
 
