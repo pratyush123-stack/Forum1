@@ -1,2 +1,4 @@
-const URI = "mongodb+srv://Pratyush:rmSPQ1HScbiPS1UV@cluster0.kvpji2j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const constants = require('../constants/Constants');
+
+const URI = constants.URI;
 module.exports = URI ;

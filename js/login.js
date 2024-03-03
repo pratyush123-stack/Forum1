@@ -1,3 +1,5 @@
+const constants = require('../constants/Constants');
+
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const URI = require('../db/databaseConfig');
@@ -7,7 +9,7 @@ const userLoginDetails = require('../models/UserLoginDetails');
 const validations = require('../utils/validations');
 
 function generateID() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = constants.ID_GENERATION_CHARACTERS;
     let id = '';
     for (let i = 0; i < 8; i++) {
         id += characters.charAt(Math.floor(Math.random() * characters.length));
@@ -28,29 +30,29 @@ async function createUser(username, password, firstName, lastName, emailId, phon
     const genderFlag = validations.validateGender(gender);
 
     if (!usernameFlag) {
-        console.log("Username is invalid");
-        return "UserName Invalid";
+        console.log(constants.USERNAME_INVALID);
+        return constants.USERNAME_INVALID;
     } else if (!passwordFlag) {
-        console.log("Password is invalid");
-        return "Password Invalid";
+        console.log(constants.PASSWORD_INVALID);
+        return constants.PASSWORD_INVALID;
     } else if (!firstNameFlag) {
-        console.log("First name is invalid");
-        return "First Name Invalid";
+        console.log(constants.FIRST_NAME_INVALID);
+        return constants.FIRST_NAME_INVALID;
     } else if (!lastNameFlag) {
-        console.log("Last name is invalid");
-        return "Last Name Invalid";
+        console.log(constants.LAST_NAME_INVALID);
+        return constants.LAST_NAME_INVALID;
     } else if (!emailIdFlag) {
-        console.log("Email ID is invalid");
-        return "Email ID Invalid";
+        console.log(constants.EMAIL_ID_INVALID);
+        return constants.EMAIL_ID_INVALID;
     } else if (!phoneNoFlag) {
-        console.log("Phone number is invalid");
-        return "Phone Number Invalid";
+        console.log(constants.PHONE_NUMBER_INVALID);
+        return constants.PHONE_NUMBER_INVALID;
     } else if (!dateOfBirthFlag) {
-        console.log("Date of birth is invalid");
-        return "Date of Birth Invalid";
+        console.log(constants.DATE_OF_BIRTH_INVALID);
+        return constants.DATE_OF_BIRTH_INVALID;
     } else if (!genderFlag) {
-        console.log("Gender is invalid");
-        return "Gender Invalid";
+        console.log(constants.GENDER_INVALID);
+        return constants.GENDER_INVALID;
     }
 
     console.log("All input parameters are valid");
@@ -60,8 +62,8 @@ async function createUser(username, password, firstName, lastName, emailId, phon
         console.log("Connected to MongoDB");
         const existingUser = await userLoginDetails.findOne({ userName: username });
         if (existingUser) {
-            console.log("User with username", username, "already exists");
-            return "UserName Already Taken";
+            console.log(constants.USER_NAME_ALREADY_TAKEN);
+            return constants.USER_NAME_ALREADY_TAKEN;
         }
         const uID = generateID();
         console.log("Generated unique user ID:", uID);
@@ -89,10 +91,10 @@ async function createUser(username, password, firstName, lastName, emailId, phon
         });
         console.log("UserLoginDetails created successfully");
 
-        return "User Created Successfully";
+        return constants.USER_CREATED_SUCCESSFULLY;
     } catch (error) {
         console.error("Error occurred:", error);
-        return "Error occurred while creating user";
+        return constants.ERROR_OCCURRED;
     }
 }
 
@@ -104,11 +106,11 @@ async function validateUserLogin(userName, password) {
     const passwordFlag = validations.validatePassword(password);
 
     if (!usernameFlag) {
-        console.log("Username is invalid");
-        return "UserName Invalid";
+        console.log(constants.USERNAME_INVALID);
+        return constants.USERNAME_INVALID;
     } else if (!passwordFlag) {
-        console.log("Password is invalid");
-        return "Password Invalid";
+        console.log(constants.PASSWORD_INVALID);
+        return constants.PASSWORD_INVALID;
     }
     console.log("Username and password are valid");
 
@@ -118,23 +120,23 @@ async function validateUserLogin(userName, password) {
 
         const loginUser = await userLoginDetails.findOne({ userName: userName });
         if (!loginUser) {
-            console.log("User not found");
-            return "User not found";
+            console.log(constants.USER_NOT_FOUND);
+            return constants.USER_NOT_FOUND;
         } else {
             console.log("User found in database");
             const passwordMatchFlag = await bcrypt.compare(password, loginUser.password);
             if (passwordMatchFlag) {
-                console.log("Password matched successfully");
-                console.log("Logged in Successfully");
-                return "Logged in Successfully";
+                console.log(constants.PASSWORD_MATCHED_SUCCESSFULLY);
+                console.log(constants.LOGGED_IN_SUCCESSFULLY);
+                return constants.LOGGED_IN_SUCCESSFULLY;
             } else {
-                console.log("Password did not match");
-                return "Password did not match";
+                console.log(constants.PASSWORD_DID_NOT_MATCH);
+                return constants.PASSWORD_DID_NOT_MATCH;
             }
         }
     } catch (error) {
         console.error("Error occurred:", error);
-        return "Error occurred while validating user login";
+        return constants.ERROR_OCCURRED;
     }
 }
 

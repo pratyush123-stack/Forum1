@@ -1,0 +1,23 @@
+module.exports = {
+    URI: "mongodb+srv://Pratyush:rmSPQ1HScbiPS1UV@cluster0.kvpji2j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    ID_GENERATION_CHARACTERS: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    USERNAME_INVALID: "UserName Invalid",
+    PASSWORD_INVALID: "Password Invalid",
+    FIRST_NAME_INVALID: "First Name Invalid",
+    LAST_NAME_INVALID: "Last Name Invalid",
+    EMAIL_ID_INVALID: "Email ID Invalid",
+    PHONE_NUMBER_INVALID: "Phone Number Invalid",
+    DATE_OF_BIRTH_INVALID: "Date of Birth Invalid",
+    GENDER_INVALID: "Gender Invalid",
+    USER_NAME_ALREADY_TAKEN: "UserName Already Taken",
+    USER_CREATED_SUCCESSFULLY: "User Created Successfully",
+    USER_NOT_FOUND: "User not found",
+    PASSWORD_MATCHED_SUCCESSFULLY: "Password matched successfully",
+    PASSWORD_DID_NOT_MATCH: "Password did not match",
+    LOGGED_IN_SUCCESSFULLY: "Logged in Successfully",
+    ERROR_OCCURRED: "Error occurred while {action}",
+    PAGE_HOME: "homePage",
+    PAGE_LOGIN: "login",
+    ERROR_INTERNAL_SERVER: "Internal error Occured",
+
+};
